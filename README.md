@@ -2,7 +2,7 @@
 
 Este repositório contém uma aplicação ASP.NET Core Web API construída em .NET 8, utilizando autenticação JWT, persistência de dados com PostgreSQL via Entity Framework, testes automatizados, consumo de API externa e execução via Docker Compose.
 
-> ⚠️ **Observação**: o desafio solicitava uso do .NET 9. No entanto, devido a incompatibilidades no ambiente de build da imagem Docker, optei por utilizar .NET 8 (versão estável e compatível). Justificativa técnica incluída.
+⚠️ **Observação**: o desafio solicitava uso do .NET 9. No entanto, devido a incompatibilidades no ambiente de build da imagem Docker, optei por utilizar .NET 8 (versão estável e compatível). Justificativa técnica incluída.
 
 ---
 
@@ -32,7 +32,7 @@ Este repositório contém uma aplicação ASP.NET Core Web API construída em .N
 
 ```bash
 git clone https://github.com/Andibris/DesafioBackend.git
-cd seu-repo
+cd DesafioBackend
 ```
 
 2. Suba os containers com:
