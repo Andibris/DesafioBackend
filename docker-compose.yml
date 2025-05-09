@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: desafio_api
+    build:
+      context: .
+      dockerfile: DesafioApi/Dockerfile  # Caminho correto relativo à raiz da solução
+    ports:
+      - "5103:8080"  # Porta externa:interna
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # Garante que o Swagger seja habilitado
+    depends_on:
+      - postgres
+    networks:
+      - desafio-network
+    volumes:
+      - ./DesafioApi/appsettings.Docker.json:/app/appsettings.Docker.json:ro
+
+  postgres:
+    container_name: desafio_postgres
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: desafioapi
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - desafio-network
+
+  ef-migrator:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    container_name: ef_migrator
+    working_dir: /src
+    volumes:
+      - .:/src
+    entrypoint: ["tail", "-f", "/dev/null"]
+    depends_on:
+      - postgres
+    networks:
+      - desafio-network
+
+volumes:
+  pgdata:
+
+networks:
+  desafio-network:
